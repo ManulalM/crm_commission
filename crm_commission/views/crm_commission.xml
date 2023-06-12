@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_commission_view_form" model="ir.ui.view">
+        <field name="name">crm.commission.disease.form</field>
+        <field name="model">crm.commission</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="HM_Title">
+                        <h1>
+                            Commission Plans
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name_id" invisible="1"/>
+                            <field name="name"/>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="types" attrs="{'invisible':[('type', 'not in', ('rw'))]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="product wise" attrs="{'invisible':[('type', 'not in', ( 'pw'))]}">
+                            <field name="order_line_ids">
+                                <tree editable="botton">
+                                    <field name="product_category_id"/>
+                                    <field name="product_id"/>
+                                    <field name="rate" widget="percentage" class="text-left"/>
+                                    <field name="max_commission"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Revenue wise" attrs="{'invisible':[('type', 'not in', ( 'rw'))]}">
+                            <field name="connect_line_ids">
+                                <tree editable="botton">
+                                    <field name="sequence"/>
+                                    <field name="from_amount"/>
+                                    <field name="to_amount"/>
+                                    <field name="rate" widget="percentage" class="text-left"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_commission_action" model="ir.actions.act_window">
+        <field name="name">Commission</field>
+        <field name="res_model">crm.commission</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Patient record!
+            </p>
+        </field>
+    </record>
+</odoo>

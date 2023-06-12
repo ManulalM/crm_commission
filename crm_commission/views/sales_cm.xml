@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_order_commission" model="ir.ui.view">
+        <field name="name">sale.order.commission.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='validity_date']" position="after">
+                <field name="commission_amount" readonly="1"/>
+                <field name="commission_rate" widget="percentage" readonly="1" invisible="1" force_save="1"/>
+                <field name="plan_type_id" force_save="1"/>
+                <field name="from_amount" force_save="1"/>
+                <field name="to_amount" force_save="1"/>
+                <field name="revenue_type" readonly="1" force_save="1"/>
+                <field name="comms_type" readonly="1" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
